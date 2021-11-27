@@ -107,24 +107,37 @@ public class MyMenuBar extends JMenuBar implements ActionListener {
                     saveToGraphicsFile(fileChooser.getSelectedFile());
             }
             if (e.getSource() == findItem){
-                String value = JOptionPane.showInputDialog(
-                        null,
-                        "Введите значение для поиска",
-                        "Поиск значения",
-                        JOptionPane.QUESTION_MESSAGE);
+                JTextField xField = new JTextField(5);
+                JTextField yField = new JTextField(5);
 
-                MainFrame.getRenderer().setNeedle(value);
+                JPanel myPanel = new JPanel();
+                myPanel.add(new JLabel("Нижняя граница:"));
+                myPanel.add(xField);
+                myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+                myPanel.add(new JLabel("Верхняя граница:"));
+                myPanel.add(yField);
+
+                String value1 = null, value2 = null;
+
+                JOptionPane.showConfirmDialog(null, myPanel,
+                        "Найти из диапазона", JOptionPane.OK_CANCEL_OPTION);
+
+                value1 = xField.toString();
+                value2 = yField.toString();
+
+                MainFrame.getRenderer().setNeedle(value1, value2);
                 this.repaint();
             }
             if (e.getSource() == exitItem) {
                 System.exit(0);
             }
             if (e.getSource() == infoItem) {
+                ImageIcon icon = new ImageIcon("D://Java//Lab3.2//ава.jpg");
                 JOptionPane.showMessageDialog(
                         null,
                         "Создатель: Добринский Илья Сергеевич\nСтудент 6 группы",
                         "О создателе",
-                        JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.PLAIN_MESSAGE,icon);
             }
         }
         catch (NullPointerException ex){

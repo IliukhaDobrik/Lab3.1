@@ -11,7 +11,8 @@ public class GornerTableCellRenderer implements TableCellRenderer {
     private JPanel panel = new JPanel();
     private JLabel label = new JLabel();
 
-    private String _needle = null;
+    private String _needle1 = null;
+    private String _needle2 = null;
 
     private DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance();
 
@@ -36,10 +37,15 @@ public class GornerTableCellRenderer implements TableCellRenderer {
             label.setForeground(Color.BLACK);
             label.setText(formattedDouble);
         }
-        else if (_needle != null && column == 1 && _needle.equals(formattedDouble)){
-            panel.setBackground(Color.RED);
-            label.setForeground(Color.BLACK);
-            label.setText(formattedDouble);
+        else if (_needle1 != null && _needle2 != null){
+            if(column == 1) {
+                if ( Double.parseDouble(formattedDouble)>= Double.parseDouble(_needle1) &&
+                Double.parseDouble(formattedDouble) <= Double.parseDouble(_needle2)){
+                    panel.setBackground(Color.RED);
+                    label.setForeground(Color.BLACK);
+                    label.setText(formattedDouble);
+                }
+            }
         }
         else {
             panel.setBackground(Color.BLACK);
@@ -50,7 +56,8 @@ public class GornerTableCellRenderer implements TableCellRenderer {
         return panel;
     }
 
-    public void setNeedle(String needle) {
-        _needle = needle;
+    public void setNeedle(String needle1, String needle2) {
+        _needle1 = needle1;
+        _needle2 = needle2;
     }
 }

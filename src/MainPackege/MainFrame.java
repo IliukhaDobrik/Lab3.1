@@ -77,7 +77,7 @@ public class MainFrame extends JFrame {
                 textStep.setText("0.1");
 
                 boxResult.removeAll();
-                renderer.setNeedle(null);
+                renderer.setNeedle(null,null);
 
                 boxResult.add(new JPanel());
 
